@@ -1,0 +1,28 @@
+data:
+  root_dir: data
+  raw_dir: data/raw
+  processed_dir: data/processed
+  train_file: data/processed/train.csv
+  test_file: data/processed/test.csv
+
+artifacts:
+  root_dir: artifacts
+  data_ingestion_dir: artifacts/data_ingestion
+  data_validation_dir: artifacts/data_validation
+  model_trainer_dir: artifacts/model_trainer
+
+reports:
+  root_dir: reports
+  validation_report: reports/validation_report.json
+  metrics_file: reports/metrics.json
+
+model:
+  path: artifacts/model_trainer/model.pkl
+
+preprocessor:
+  path: artifacts/model_trainer/preprocessor.pkl
+
+metrics:
+  path: reports/metrics.json
+
+random_state: 42
