@@ -30,7 +30,7 @@ reports:
   metrics_file: reports/metrics.json
 
 model:
-  path: artifacts/model_trainer/model.pkl
+  path: artifacts/model.pkl
 
 preprocessor:
   path: artifacts/preprocessor.pkl

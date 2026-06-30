@@ -30,6 +30,7 @@ class DataTransformationArtifact:
 @dataclass(frozen=True)
 class ModelTrainerArtifact:
     trained_model_path: Path
-    preprocessor_path: Path
     metrics_path: Path
+    best_model_name: str
     test_score: float
+    metrics: dict[str, dict[str, float]]

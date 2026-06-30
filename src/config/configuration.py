@@ -6,6 +6,7 @@ from src.entity.config_entity import (
     DataIngestionConfig,
     DataTransformationConfig,
     DataValidationConfig,
+    ModelTrainingConfig,
 )
 from src.utils.common import read_yaml
 
@@ -71,5 +72,15 @@ class ConfigurationManager:
             test_array_path=Path(data_config["test_array_path"]),
             target_column=str(data_config["target_column"]),
             test_size=float(self.config.get("test_size", 0.2)),
+            random_state=self.random_state,
+        )
+
+    def get_model_training_config(self) -> ModelTrainingConfig:
+        data_config = self.data
+        return ModelTrainingConfig(
+            train_array_path=Path(data_config["train_array_path"]),
+            test_array_path=Path(data_config["test_array_path"]),
+            model_path=self.model_path,
+            metrics_path=self.metrics_path,
             random_state=self.random_state,
         )

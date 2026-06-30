@@ -29,7 +29,8 @@ class DataTransformationConfig:
 
 @dataclass(frozen=True)
 class ModelTrainingConfig:
+    train_array_path: Path
+    test_array_path: Path
     model_path: Path
-    preprocessor_path: Path
     metrics_path: Path
     random_state: int

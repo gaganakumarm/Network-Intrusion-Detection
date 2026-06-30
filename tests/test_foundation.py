@@ -27,14 +27,14 @@ def test_read_yaml_loads_config() -> None:
 
     assert config["random_state"] == 42
     assert config["data"]["raw_dir"] == "data/raw"
-    assert config["model"]["path"] == "artifacts/model_trainer/model.pkl"
+    assert config["model"]["path"] == "artifacts/model.pkl"
 
 
 def test_configuration_manager_exposes_values() -> None:
     config = ConfigurationManager()
 
     assert config.random_state == 42
-    assert config.model_path == Path("artifacts/model_trainer/model.pkl")
+    assert config.model_path == Path("artifacts/model.pkl")
     assert config.preprocessor_path == Path("artifacts/preprocessor.pkl")
     assert config.metrics_path == Path("reports/metrics.json")
 
