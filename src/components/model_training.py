@@ -14,7 +14,7 @@ from src.utils.exception import NetworkSecurityException
 from src.utils.logger import logger
 
 
-class ModelTraining:
+class ModelTrainer:
     """Trains candidate classifiers and saves the best model by F1-score."""
 
     def __init__(self, config: ModelTrainingConfig) -> None:
@@ -127,3 +127,6 @@ class ModelTraining:
             "recall": float(recall_score(y_true, y_pred, average="weighted", zero_division=0)),
             "f1_score": float(f1_score(y_true, y_pred, average="weighted", zero_division=0)),
         }
+
+
+ModelTraining = ModelTrainer
