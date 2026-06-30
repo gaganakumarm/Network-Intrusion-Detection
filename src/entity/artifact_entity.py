@@ -17,6 +17,17 @@ class DataValidationArtifact:
 
 
 @dataclass(frozen=True)
+class DataTransformationArtifact:
+    preprocessor_path: Path
+    train_array_path: Path
+    test_array_path: Path
+    numerical_columns: list[str]
+    categorical_columns: list[str]
+    train_rows: int
+    test_rows: int
+
+
+@dataclass(frozen=True)
 class ModelTrainerArtifact:
     trained_model_path: Path
     preprocessor_path: Path

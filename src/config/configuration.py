@@ -2,7 +2,11 @@ from pathlib import Path
 from typing import Any
 
 from src.constants import CONFIG_FILE_PATH
-from src.entity.config_entity import DataIngestionConfig, DataValidationConfig
+from src.entity.config_entity import (
+    DataIngestionConfig,
+    DataTransformationConfig,
+    DataValidationConfig,
+)
 from src.utils.common import read_yaml
 
 
@@ -56,4 +60,16 @@ class ConfigurationManager:
             validation_report_path=Path(reports_config["validation_report_path"]),
             required_columns=list(data_config["required_columns"]),
             target_column=str(data_config["target_column"]),
+        )
+
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        data_config = self.data
+        return DataTransformationConfig(
+            processed_dataset_path=Path(data_config["processed_dataset_path"]),
+            preprocessor_path=self.preprocessor_path,
+            train_array_path=Path(data_config["train_array_path"]),
+            test_array_path=Path(data_config["test_array_path"]),
+            target_column=str(data_config["target_column"]),
+            test_size=float(self.config.get("test_size", 0.2)),
+            random_state=self.random_state,
         )

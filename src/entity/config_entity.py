@@ -17,6 +17,17 @@ class DataValidationConfig:
 
 
 @dataclass(frozen=True)
+class DataTransformationConfig:
+    processed_dataset_path: Path
+    preprocessor_path: Path
+    train_array_path: Path
+    test_array_path: Path
+    target_column: str
+    test_size: float
+    random_state: int
+
+
+@dataclass(frozen=True)
 class ModelTrainingConfig:
     model_path: Path
     preprocessor_path: Path

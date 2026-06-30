@@ -6,6 +6,8 @@ data:
   processed_dataset_path: data/processed/network_intrusion.csv
   train_file: data/processed/train.csv
   test_file: data/processed/test.csv
+  train_array_path: data/processed/train.npy
+  test_array_path: data/processed/test.npy
   target_column: label
   required_columns:
     - duration
@@ -31,7 +33,7 @@ model:
   path: artifacts/model_trainer/model.pkl
 
 preprocessor:
-  path: artifacts/model_trainer/preprocessor.pkl
+  path: artifacts/preprocessor.pkl
 
 metrics:
   path: reports/metrics.json

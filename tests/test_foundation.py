@@ -35,7 +35,7 @@ def test_configuration_manager_exposes_values() -> None:
 
     assert config.random_state == 42
     assert config.model_path == Path("artifacts/model_trainer/model.pkl")
-    assert config.preprocessor_path == Path("artifacts/model_trainer/preprocessor.pkl")
+    assert config.preprocessor_path == Path("artifacts/preprocessor.pkl")
     assert config.metrics_path == Path("reports/metrics.json")
 
 
