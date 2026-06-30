@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import Any
 
 from src.constants import CONFIG_FILE_PATH
+from src.entity.config_entity import DataIngestionConfig, DataValidationConfig
 from src.utils.common import read_yaml
 
 
@@ -39,3 +40,20 @@ class ConfigurationManager:
     @property
     def random_state(self) -> int:
         return int(self.config.get("random_state", 42))
+
+    def get_data_ingestion_config(self) -> DataIngestionConfig:
+        data_config = self.data
+        return DataIngestionConfig(
+            dataset_path=Path(data_config["dataset_path"]),
+            processed_dataset_path=Path(data_config["processed_dataset_path"]),
+        )
+
+    def get_data_validation_config(self) -> DataValidationConfig:
+        data_config = self.data
+        reports_config = self.reports
+        return DataValidationConfig(
+            dataset_path=Path(data_config["processed_dataset_path"]),
+            validation_report_path=Path(reports_config["validation_report_path"]),
+            required_columns=list(data_config["required_columns"]),
+            target_column=str(data_config["target_column"]),
+        )
