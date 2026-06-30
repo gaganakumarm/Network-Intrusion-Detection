@@ -58,8 +58,13 @@ class PredictionPipeline:
                 probabilities = model.predict_proba(transformed_features)
                 confidence_scores = probabilities.max(axis=1)
                 result["confidence_score"] = confidence_scores
+                result["attack_probability"] = self._attack_probability(
+                    probabilities,
+                    model,
+                    label_encoder,
+                )
                 result["risk_level"] = [
-                    self._risk_level(score) for score in confidence_scores
+                    self._risk_level(score) for score in result["attack_probability"]
                 ]
             else:
                 result["risk_level"] = "Medium"
@@ -115,6 +120,27 @@ class PredictionPipeline:
         if confidence_score < 0.85:
             return "Medium"
         return "High"
+
+    @staticmethod
+    def _attack_probability(
+        probabilities: object,
+        model: object,
+        label_encoder: object | None,
+    ) -> object:
+        classes = getattr(model, "classes_", None)
+        if classes is None:
+            return probabilities.max(axis=1)
+
+        if label_encoder is not None and hasattr(label_encoder, "inverse_transform"):
+            class_labels = label_encoder.inverse_transform(classes)
+        else:
+            class_labels = classes
+
+        for index, label in enumerate(class_labels):
+            if str(label).lower() == "attack":
+                return probabilities[:, index]
+
+        return probabilities.max(axis=1)
 
 
 def predict_from_csv(

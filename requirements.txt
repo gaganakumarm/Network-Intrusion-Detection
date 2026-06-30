@@ -12,4 +12,5 @@ matplotlib
 mlflow
 joblib
 pytest
+httpx2
 pyyaml

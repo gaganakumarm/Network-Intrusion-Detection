@@ -124,8 +124,10 @@ def test_prediction_pipeline_predicts_from_dataframe(tmp_path: Path) -> None:
 
     assert list(predictions["prediction"]) == ["normal", "attack"]
     assert "confidence_score" in predictions.columns
+    assert "attack_probability" in predictions.columns
     assert "risk_level" in predictions.columns
     assert predictions["confidence_score"].between(0, 1).all()
+    assert predictions["attack_probability"].between(0, 1).all()
     assert set(predictions["risk_level"]).issubset({"Low", "Medium", "High"})
 
 
@@ -152,3 +154,4 @@ def test_predict_from_csv_helper(tmp_path: Path) -> None:
     assert len(predictions) == 1
     assert predictions.loc[0, "prediction"] == "normal"
     assert "confidence_score" in predictions.columns
+    assert "attack_probability" in predictions.columns
